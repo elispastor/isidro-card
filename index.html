@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Acarreos & Trasteos - Isidro Torres</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --trigo-suave: #f5deb3;
+      --naranja-suave: #ffb450;
+      --naranja-oscuro: #d6862e;
+      --texto-oscuro: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--trigo-suave);
+      color: var(--texto-oscuro);
+    }
+
+    /* Barra superior tipo sitio */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 180, 80, 0.95);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+    }
+
+    .brand {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      margin-left: 16px;
+      text-decoration: none;
+      color: #222222;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--naranja-oscuro);
+    }
+
+    /* Sección principal (hero) */
+    .hero {
+      max-width: 1000px;
+      margin: 16px auto 40px;
+      background: #fff8e6;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+      overflow: hidden;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      /* Aquí va la portada de la camioneta */
+      background-image: url("portada.jpg");
+      transition: transform 0.6s ease, filter 0.6s ease;
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    /* movimiento suave al pasar el mouse por la tarjeta */
+    .hero:hover .hero-img {
+      transform: scale(1.05);
+      filter: saturate(1.15) contrast(1.05);
+    }
+
+    .hero-content {
+      padding: 20px 22px 26px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #555555;
+      margin-bottom: 12px;
+    }
+
+    .hero-text {
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+    }
+
+    .buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--naranja-suave);
+      color: #222222;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--naranja-oscuro);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--texto-oscuro);
+      border: 1px solid #e0b97a;
+    }
+
+    .btn-secondary:hover {
+      background: #fff3cf;
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      font-size: 1.1rem;
+    }
+
+    /* Sección servicios simple */
+    #servicios {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      padding: 0 16px;
+      scroll-margin-top: 80px;
+    }
+
+    #servicios h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .servicio-card {
+      background: #fffdf5;
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      font-size: 0.95rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .servicio-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    /* Sección contacto */
+    #contacto {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      padding: 0 16px;
+      scroll-margin-top: 80px;
+    }
+
+    #contacto h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .contacto-box {
+      background: #fffdf5;
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      font-size: 0.95rem;
+    }
+
+    .contacto-box p {
+      margin-bottom: 6px;
+    }
+
+    .contacto-dato {
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      background: #f0cf96;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #444444;
+    }
+
+    footer small {
+      display: block;
+    }
+
+    @media (min-width: 720px) {
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+      }
+      .hero-img {
+        height: 100%;
+      }
+      .hero-content {
+        text-align: left;
+        padding: 26px 26px 26px 22px;
+      }
+      .buttons-row {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Barra superior simple -->
+  <header>
+    <div class="nav-container">
+      <div class="brand">Acarreos &amp; Trasteos</div>
+      <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero / Portada -->
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-img">
+        <!-- Aquí se verá portada.jpg -->
+      </div>
+      <div class="hero-content">
+        <div class="hero-title">Viajes &amp; Mudanzas en Cúcuta</div>
+        <div class="hero-subtitle">Acarreos con trato cordial</div>
+        <p class="hero-text">
+          Acarreos, trasteos y viajes dentro y fuera de Cúcuta. Servicio responsable y amable con el cuidado de sus pertenencias.
+        </p>
+
+        <div class="buttons-row">
+          <!-- Botón WhatsApp -->
+          <a class="btn btn-primary" href="https://wa.me/573115307778" target="_blank" rel="noopener">
+            <span class="btn-icon">💬</span>
+            <span>Cotiza tu viaje por WhatsApp</span>
+          </a>
+
+          <!-- Botón llamada -->
+          <a class="btn btn-secondary" href="tel:+573115307778">
+            <span class="btn-icon">📞</span>
+            <span>Llamar ahora</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Servicios simples -->
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <div class="servicios-grid">
+      <div class="servicio-card">Acarreos y trasteos locales.</div>
+      <div class="servicio-card">Viajes y mudanzas dentro y fuera de la ciudad.</div>
+      <div class="servicio-card">Trato cordial y puntualidad.</div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <div class="contacto-box">
+      <p class="contacto-dato">Isidro Torres</p>
+      <p>Cel: 311 530 77 78</p>
+      <p>Cúcuta, Norte de Santander - Colombia</p>
+      <p>Haz clic en los botones de arriba para escribir por WhatsApp o llamar directamente.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <small>&copy; 2026 Acarreos &amp; Trasteos - Isidro Torres. Todos los derechos reservados.</small>
+  </footer>
+
+</body>
+</html>
