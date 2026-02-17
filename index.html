@@ -49,8 +49,13 @@
       font-size: 1.1rem;
     }
 
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
     nav a {
-      margin-left: 16px;
       text-decoration: none;
       color: #222222;
       font-size: 0.95rem;
@@ -59,6 +64,77 @@
 
     nav a:hover {
       color: var(--naranja-oscuro);
+    }
+
+    /* BOTÓN HAMBURGUESA */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      margin-left: 10px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background-color: #222222;
+      margin: 4px 0;
+      transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* Menú móvil oculto/visible */
+    .nav-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    @media (max-width: 720px) {
+      nav {
+        position: relative;
+      }
+
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 120%;
+        right: 0;
+        background: rgba(255, 180, 80, 0.98);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        padding: 10px 14px;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 160px;
+      }
+
+      .nav-links a {
+        padding: 6px 2px;
+        font-size: 1rem;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+    }
+
+    /* animación del icono hamburguesa cuando abre */
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
     }
 
     /* Sección principal (hero) */
@@ -266,9 +342,16 @@
     <div class="nav-container">
       <div class="brand">Acarreos &amp; Trasteos</div>
       <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#contacto">Contacto</a>
+        <button class="menu-toggle" aria-label="Abrir menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links">
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#contacto">Contacto</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -328,6 +411,26 @@
   <footer>
     <small>&copy; 2026 Acarreos &amp; Trasteos - Isidro Torres. Todos los derechos reservados.</small>
   </footer>
+
+  <!-- Script para menú hamburguesa -->
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('show');
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('active');
+          navLinks.classList.remove('show');
+        });
+      });
+    }
+  </script>
 
 </body>
 </html>
